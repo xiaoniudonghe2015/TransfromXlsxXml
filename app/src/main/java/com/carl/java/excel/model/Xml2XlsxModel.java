@@ -1,6 +1,9 @@
 package com.carl.java.excel.model;
 
+import android.text.TextUtils;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -32,6 +35,15 @@ public class Xml2XlsxModel extends BaseModel{
 					continue;
 				}
 				List<Entry> list = XmlUtil.readXml(config.getXmlPath());
+				List<Entry> otherLanlist = XmlUtil.readXml(config.getOtherLanXmlPath());
+				for (Entry entry1 : otherLanlist) {
+					for (Entry entry2 : list) {
+						if (entry1.getName().equals(entry2.getName())) {
+							list.remove(entry2);
+							break;
+						}
+					}
+				}
 				ExcelUtil.writeExcel(config.getXlsxPath(),
 						config.getSheetName(), list,
 						config.getValue());

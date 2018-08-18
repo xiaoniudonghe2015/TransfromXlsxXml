@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -31,8 +32,9 @@ public class XmlUtil {
 	private static final String BR = "\n";
 	
 	public static List<Entry> readXml(String path) {
+		List<Entry> list = new ArrayList<>();
 		if (path == null) {
-			return null;
+			return list;
 		}
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
@@ -40,7 +42,7 @@ public class XmlUtil {
 			File f = new File(path);
 			StringHandler dh = new StringHandler();
 			parser.parse(f, dh);
-			List<Entry> list = dh.getList();
+			list = dh.getList();
 			
 			return list;
 		} catch (ParserConfigurationException e) {
@@ -53,7 +55,7 @@ public class XmlUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 	
 	public static void writeXml(List<Entry> list, String path) {

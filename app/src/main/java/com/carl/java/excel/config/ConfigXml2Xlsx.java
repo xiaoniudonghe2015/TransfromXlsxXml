@@ -16,6 +16,7 @@ import java.util.List;
 public class ConfigXml2Xlsx {
 	
 	private String xmlPath;
+	private String otherLanXmlPath;
 	private String xlsxPath;
 	private String sheetName;
 	private String[] language;
@@ -27,6 +28,15 @@ public class ConfigXml2Xlsx {
 	public void setXmlPath(String path) {
 		this.xmlPath = path;
 	}
+
+	public String getOtherLanXmlPath() {
+		return otherLanXmlPath;
+	}
+
+	public void setOtherLanXmlPath(String otherLanXmlPath) {
+		this.otherLanXmlPath = otherLanXmlPath;
+	}
+
 	public String getXlsxPath() {
 		return xlsxPath;
 	}
@@ -58,6 +68,7 @@ public class ConfigXml2Xlsx {
 		sb.append("--------------CONFIG-------------")
 		.append("\nxmlPath="+ xmlPath)
 		.append("\nxlsxPath=" + xlsxPath)
+		.append("\notherLanXmlPath=" + otherLanXmlPath)
 		.append("\nsheetName=" + sheetName)
 		.append("\nlanguage=" + language)
 		.append("\nvalue=" + value)
@@ -102,7 +113,9 @@ public class ConfigXml2Xlsx {
 						config.setSheetName(array[1]);
 					}  else if (array[0].equalsIgnoreCase("value")) {
 						config.setValue(array[1]);
-					} 
+					}  else if (array[0].equalsIgnoreCase("otherLanXmlPath")) {
+						config.setOtherLanXmlPath(array[1]);
+					}
 				}
 				
 			}
